@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { productos } from "../data/products";
+import ItemDetail from "./ItemDetail";
 
 export default function ItemDetailContainer () {
     const [detail, setDetail] = useState(null)
@@ -19,13 +20,6 @@ export default function ItemDetailContainer () {
 
 
     return (
-        <div>
-            <img src={`/images/${detail.imagen}`} alt={detail.nombre} />
-            <h1>{detail.nombre}</h1>
-            <p>{detail.descripcion}</p>
-            <p><strong>Precio:</strong> {detail.precio}</p>
-            <p><strong>Stock:</strong> {detail.stock}</p>
-            <button>Agregar al Carrito</button>
-        </div>
-    );
+        <ItemDetail detail={detail} />
+    )
 }
