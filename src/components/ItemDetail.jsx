@@ -1,3 +1,5 @@
+import ItemCount from "./ItemCount"
+
 function ItemDetail({ detail }) {
     return (
         <div>
@@ -6,7 +8,7 @@ function ItemDetail({ detail }) {
             <p>{detail.descripcion}</p>
             <p><strong>Precio:</strong> {detail.precio}</p>
             <p><strong>Stock:</strong> {detail.stock}</p>
-            <button>Agregar al Carrito</button>
+            <ItemCount />
         </div>
     )
 }
