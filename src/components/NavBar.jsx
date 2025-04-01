@@ -1,23 +1,52 @@
-import CartWidget from './CartWidget';
+import CartWidget from './CartWidget'
+import { useEffect, useState } from 'react';
+import { Navbar, Nav, Dropdown } from "react-bootstrap"; 
+import { productos } from "../data/products";
+import { NavLink } from "react-router";
 
-function Navbar () {
+function NavBar() {
+    const [categorias, setCategorias] = useState ([])
+
+    useEffect(() => {
+        const getCategories = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const categoriasUnicas = [...new Set(productos.map(item => item.categoria))];
+                    resolve(categoriasUnicas);
+                }, 500);
+            });
+        };
+
+        getCategories().then(setCategorias);
+    }, []);
+
     return (
-        <nav className="navbar">
-            <div className="navbar-left">
-                <a href="/" className="logo">Coffee</a>
-            </div>
-            <div className="navbar-center">
-                <ul className="nav-links">
-                    <li><a href="/tazas">Tazas</a></li>
-                    <li><a href="/cafeteras">Cafeteras</a></li>
-                    <li><a href="/accessorios">Accessorios</a></li>
-                </ul>
-            </div>
-            <div className="cart">
-                <CartWidget itemCount={1} />
-            </div>
-        </nav>
+        <Navbar bg="dark" expand="lg" data-bs-theme="dark">
+                <Navbar.Brand 
+                    to="/"
+                    as={NavLink}
+                >
+                    CoffeStore
+                </Navbar.Brand>
+            <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    Categorias
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                    {categorias.map(cat => (
+                        <Dropdown.Item 
+                            to={`/category/${cat}`}
+                            key={cat} 
+                            as={NavLink}
+                        >
+                            {cat}
+                        </Dropdown.Item>))}
+                </Dropdown.Menu>
+            </Dropdown>
+            <CartWidget />
+        </Navbar>
     );
 }
 
-export default Navbar;
+export default NavBar;
