@@ -4,7 +4,7 @@ import { Navbar, Nav, Dropdown } from "react-bootstrap";
 import { productos } from "../data/products";
 import { NavLink } from "react-router";
 
-function NavBar () {
+function Navbar () {
     const [categorias, setCategorias] = useState ([])
 
     useEffect(() => {
@@ -49,4 +49,4 @@ function NavBar () {
     );
 }
 
-export default NavBar;
+export default Navbar;
