@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { productos } from "../data/products";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebaseConfig" 
 import ItemList from "./ItemList";
 import { withLoading } from "../hoc/withLoading";
 import { useParams } from "react-router";
